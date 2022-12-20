@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import CompletedLifts from "./CompletedLifts";
+import DisplayExercise from "./DisplayExercise"
 // import { v4 as uuidv4 } from 'uuid'
 
-export default function DisplayCurrentWorkout({ workouts, handleAddSet, handleExerciseSelect }) {
+export default function DisplayCurrentWorkout({
+  workouts,
+  handleAddSet,
+  handleExerciseSelect,
+}) {
   const [reps, setReps] = useState(0);
   const [weight, setWeight] = useState(0);
-//   const [selectedId, setSelectedId] = useState()
-//   const selectedExercise = workouts.find(el => el.id === selectedExerciseId )
-//   console.log(selectedExercise)
+  //   const [selectedId, setSelectedId] = useState()
+  //   const selectedExercise = workouts.find(el => el.id === selectedExerciseId )
+  //   console.log(selectedExercise)
 
-//   function handleExerciseSelect(id) {
-//     setExerciseRecipeId(id)
-//   }
+  //   function handleExerciseSelect(id) {
+  //     setExerciseRecipeId(id)
+  //   }
 
   function handleReps(e) {
     setReps(e.target.value);
@@ -21,21 +26,23 @@ export default function DisplayCurrentWorkout({ workouts, handleAddSet, handleEx
     setWeight(e.target.value);
   }
 
+  function filteredList(list, id) {
+    console.log(list);
+    console.log(id);
+    return list.filter((item) => {
+      console.log(item);
+      return item.id === id;
+    });
+  }
+
   const workoutExercises = workouts[0].exercise;
-
-  //   const orderedExercises = useRef(null)
-
-  //   useEffect(() => {
-  //     orderedExercises.current = document.getElementsByClassName('addBtn')
-  //   })
 
   return (
     <>
-      {workouts.map((el, i) => {
+      {/* {workouts.map((el, i) => {
         return (
           <div key={el.id}>
             <h1>{el.templateName}</h1>
-            {/* <h2>Exercise: {el.exercise[i].name}</h2> */}
             {workoutExercises.map((el, i) => {
               return (
                 <div key={el.logged[i].id}>
@@ -55,7 +62,7 @@ export default function DisplayCurrentWorkout({ workouts, handleAddSet, handleEx
                   <div>
                     <h2>Completed</h2>
                     <CompletedLifts
-                      completed={workoutExercises}
+                      completed={filteredList(workoutExercises, el.id)}
                     />
                   </div>
                 </div>
@@ -63,6 +70,14 @@ export default function DisplayCurrentWorkout({ workouts, handleAddSet, handleEx
             })}
           </div>
         );
+      })} */}
+      {workouts.map((el) => {
+        return (
+        <div key={el.id}>
+        <h1>{el.templateName}</h1>
+        <DisplayExercise workouts={workouts}/>
+        </div>
+        )
       })}
     </>
   );

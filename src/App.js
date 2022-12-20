@@ -4,6 +4,8 @@ import React, {useState} from "react"
 import DisplayCurrentWorkout from "./DisplayCurrentWorkout";
 import { v4 as uuidv4 } from 'uuid'
 
+export const ExerciseContext = React.createContext()
+
 function App() {
   const createdWorkouts = [{
     id: uuidv4(),
@@ -45,7 +47,14 @@ function App() {
 
   const [completed, setCompleted] = useState(createdWorkouts)
 
+  const exerciseContextValue = {
+    handleAddSet,
+  }
+
   function handleAddSet(r, w, id) {
+    // console.log(id)
+    const matchExercise = completed[0].exercise.filter((el) => el.id === id)
+    console.log(completed)
 
     const newCompleteLog = {
         id: uuidv4(),
@@ -54,21 +63,28 @@ function App() {
         weight: w
     }
 
+    matchExercise[0].logged.push(newCompleteLog)
+
+    // const updateCompleted = [{
+    //   ...completed[0],
+    //   exercise: [
+    //     {...completed[0].exercise[0], logged: [...completed[0].exercise[0].logged, matchExercise]}, {...completed[0].exercise[1]}
+    //   ]
+    // }]
+
     const updateCompleted = [{
-      ...completed[0],
-      exercise: [
-        {...completed[0].exercise[0], logged: [...completed[0].exercise[0].logged, newCompleteLog]}, {...completed[0].exercise[1]}
-      ]
+      ...completed[0]
     }]
+
+    console.log(updateCompleted)
     
     setCompleted(updateCompleted)
-    console.log(completed)
   }
 
   return (
-    <div>
+    <ExerciseContext.Provider value={exerciseContextValue}>
       <DisplayCurrentWorkout workouts={completed} handleAddSet={handleAddSet}/>
-    </div>
+    </ExerciseContext.Provider>
   );
 }
 
