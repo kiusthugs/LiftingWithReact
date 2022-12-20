@@ -2,9 +2,6 @@ import React from 'react'
 
 export default function CompletedLifts({completed}) {
     const workoutLog = completed[0].exercise[0].logged
-    // console.log(workoutLog)
-    // const oof = completed.map(el => el)
-    // console.log(oof)
   return (
     workoutLog.map((el,i) => {
         // console.log(completed)
