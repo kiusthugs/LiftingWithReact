@@ -1,41 +1,13 @@
-import React, { useState } from "react";
-import CompletedLifts from "./CompletedLifts";
+import React from "react";
+// import CompletedLifts from "./CompletedLifts";
 import DisplayExercise from "./DisplayExercise"
 // import { v4 as uuidv4 } from 'uuid'
 
 export default function DisplayCurrentWorkout({
   workouts,
-  handleAddSet,
-  handleExerciseSelect,
 }) {
-  const [reps, setReps] = useState(0);
-  const [weight, setWeight] = useState(0);
-  //   const [selectedId, setSelectedId] = useState()
-  //   const selectedExercise = workouts.find(el => el.id === selectedExerciseId )
-  //   console.log(selectedExercise)
 
-  //   function handleExerciseSelect(id) {
-  //     setExerciseRecipeId(id)
-  //   }
-
-  function handleReps(e) {
-    setReps(e.target.value);
-  }
-
-  function handleWeight(e) {
-    setWeight(e.target.value);
-  }
-
-  function filteredList(list, id) {
-    console.log(list);
-    console.log(id);
-    return list.filter((item) => {
-      console.log(item);
-      return item.id === id;
-    });
-  }
-
-  const workoutExercises = workouts[0].exercise;
+//   const workoutExercises = workouts[0].exercise;
 
   return (
     <>
