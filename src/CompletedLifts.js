@@ -1,7 +1,8 @@
 import React from 'react'
 
 export default function CompletedLifts({completed}) {
-    const workoutLog = completed[0].exercise[0].logged
+    console.log(completed)
+    const workoutLog = completed[0].logged
   return (
     workoutLog.map((el,i) => {
         // console.log(completed)

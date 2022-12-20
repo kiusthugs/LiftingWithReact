@@ -43,7 +43,7 @@ function App() {
 
   const [completed, setCompleted] = useState(createdWorkouts)
 
-  function handleAddSet(r, w) {
+  function handleAddSet(r, w, id) {
     const newCompleteLog = {
         id: uuidv4(),
         set: 2,
@@ -52,7 +52,7 @@ function App() {
     }
 
     const updateCompleted = [{
-      ...completed,
+      ...completed[0],
       exercise: [
         {...completed[0].exercise[0], logged: [...completed[0].exercise[0].logged, newCompleteLog]}
       ]
