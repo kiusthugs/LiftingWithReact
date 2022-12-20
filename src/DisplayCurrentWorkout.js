@@ -33,7 +33,7 @@ export default function DisplayCurrentWorkout({
           <div key={el.id}>
             <h1>{el.templateName}</h1>
             <h2>Exercise: {el.exercise[i].name}</h2>
-            <div key={el.id+1}>
+            <div>
               <h3 htmlFor="exSet">
                 Set: {el.exercise[i].logged[i].set}
               </h3>
