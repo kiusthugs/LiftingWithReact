@@ -9,6 +9,7 @@ function App() {
     id: uuidv4(),
     templateName: "Push Day",
     exercise: [{
+      id: uuidv4(),
       name: "Bench",
       logged: [{
         id: uuidv4(),
@@ -24,6 +25,7 @@ function App() {
       }
       ],
     }, {
+      id: uuidv4(),
       name: "Tricep Pushdown",
       logged: [{
         id: uuidv4(),
@@ -44,6 +46,7 @@ function App() {
   const [completed, setCompleted] = useState(createdWorkouts)
 
   function handleAddSet(r, w, id) {
+
     const newCompleteLog = {
         id: uuidv4(),
         set: 2,
@@ -54,7 +57,7 @@ function App() {
     const updateCompleted = [{
       ...completed[0],
       exercise: [
-        {...completed[0].exercise[0], logged: [...completed[0].exercise[0].logged, newCompleteLog]}
+        {...completed[0].exercise[0], logged: [...completed[0].exercise[0].logged, newCompleteLog]}, {...completed[0].exercise[1]}
       ]
     }]
     
