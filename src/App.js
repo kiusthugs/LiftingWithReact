@@ -44,7 +44,25 @@ function App() {
         weight: 0
       }
       ],
-    }]
+    },
+    {
+      id: uuidv4(),
+      name: "Shoulder Press",
+      logged: [{
+        id: uuidv4(),
+        set: 1,
+        reps: 0,
+        weight: 0
+      },
+      {
+        id: uuidv4(),
+        set: 2,
+        reps: 0,
+        weight: 0
+      }
+      ],
+    }
+  ]
   }]
 
   const [completed, setCompleted] = useState(createdWorkouts)
@@ -52,18 +70,14 @@ function App() {
   const exerciseContextValue = {
     handleAddSet,
     handleTemplate
-    // setTemplateState,
-    // templateState
   }
 
   function handleTemplate(arr, tempName) {
-    console.log(createdWorkouts)
     const newTemplateObj = [{
       id: uuidv4(),
       templateName: tempName,
       exercise: [...arr]
     }]
-    console.log(newTemplateObj)
     setCompleted(newTemplateObj)
   }
 
