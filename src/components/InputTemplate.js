@@ -14,18 +14,18 @@ export default function InputTemplate() {
     id: uuidv4(),
     name: "Bench",
     logged: [
-      {
-        id: uuidv4(),
-        set: 1,
-        reps: 0,
-        weight: 0,
-      },
+      // {
+      //   id: uuidv4(),
+      //   set: 1,
+      //   reps: 0,
+      //   weight: 0,
+      // },
+      {id: uuidv4()}
     ],
   };
 
   function addExerciseList(exercise) {
     setExerciseArr([...exerciseArr, exercise]);
-    console.log(exerciseArr);
   }
 
   return (
@@ -61,7 +61,8 @@ export default function InputTemplate() {
       <TemplateList exerciseList={exerciseArr} tempName={tempName} />
       <button
         onClick={() => {
-          handleTemplate(exerciseArr, tempName);
+          handleTemplate(exerciseArr, tempName)
+          setExerciseArr([])
         }}
       >
         Save

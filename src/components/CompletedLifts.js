@@ -7,7 +7,7 @@ export default function CompletedLifts({selected}) {
         // console.log(completed)
         // console.log(el.exercise[i].logged[i].id)
         return (
-        <li key={el.id}>Set {el.set}: {el.reps} Reps @ {el.weight} lbs</li>
+        el.set && <li key={el.id}>Set {el.set}: {el.reps} Reps @ {el.weight} lbs</li>
         )
     })
   )
