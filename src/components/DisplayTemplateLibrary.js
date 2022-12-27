@@ -1,19 +1,22 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import StoredExerciseList from "./StoredExerciseList"
+import { ExerciseContext } from "./App";
 
 
 export default function DisplayTemplateLibrary({templateLibrary}) {
+    const { handleTemplateSelected } = useContext(ExerciseContext);
+
     console.log(templateLibrary)
     const getExerciseContent = (templateLibrary) => {
         let content = [];
-        console.log(templateLibrary[0][0])
         for (let i = 0; i < templateLibrary.length; i++) {
             for (let j = 0; j < templateLibrary[i].exercise.length; j++) {
-                console.log("here")
               content.push(
-              <div key={templateLibrary[i].exercise[j].id}>
+              <div key={templateLibrary[i].exercise[j].id} data-template={templateLibrary[i].exercise[j].id} onClick={(e) => handleTemplateSelected(e,templateLibrary[i])}>
                 <h2>{templateLibrary[i].templateName}</h2>
+                <ul>
                 <StoredExerciseList templateExercises={templateLibrary[i].exercise}/>
+                </ul>
               </div>
               );
               j = templateLibrary[i].exercise.length;
@@ -22,7 +25,7 @@ export default function DisplayTemplateLibrary({templateLibrary}) {
         return content;
       };
 
-      return <>{getExerciseContent(templateLibrary)}</>;
+      return <><h1>Template Libary</h1>{getExerciseContent(templateLibrary)}</>;
 //   return (
 //     <div>
 //         {/* {templateLibrary.map((el, i) => {

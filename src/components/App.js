@@ -70,7 +70,8 @@ function App() {
   const [templateLibrary, setTemplateLibrary] = useState()
   const exerciseContextValue = {
     handleAddSet,
-    handleTemplate
+    handleTemplate,
+    handleTemplateSelected
   }
 
   function handleTemplate(arr, tempName) {
@@ -91,7 +92,15 @@ function App() {
     })
     // setTemplateLibrary([...templateLibrary, newTemp])
     console.log(templateLibrary)
-    setCompleted(newTemplateObj)
+    // setCompleted(newTemplateObj)
+  }
+
+  function handleTemplateSelected(e, template){
+    console.log(e)
+    console.log(template)
+    if (e.target.closest("[data-template]")) {
+      setCompleted([template])
+    }
   }
 
   function handleAddSet(r, w, list, id) {
