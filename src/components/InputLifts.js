@@ -18,9 +18,9 @@ export default function InputLifts({ selected}) {
 
   return (
     <div>
-      <input type="text" id="exReps" onChange={handleReps} />
+      <input type="text" id="exReps" onChange={handleReps} placeholder="Reps"/>
       <span>Reps @</span>
-      <input type="text" id="exWeight" onChange={handleWeight} />
+      <input type="text" id="exWeight" onChange={handleWeight} placeholder="Pounds"/>
       <button
         className="addBtn"
         onClick={() => {

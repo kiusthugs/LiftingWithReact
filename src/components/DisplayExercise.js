@@ -1,14 +1,42 @@
-import React from "react";
+import React, {useState, useEffect, useContext} from "react";
 import CompletedLifts from "./CompletedLifts";
 import InputLifts from "./InputLifts";
+import WorkoutHistory from "./WorkoutHistory"
+import { ExerciseContext } from "./App";
 
 export default function DisplayExercise({
   workouts,
   handleReps,
   handleWeight,
 }) {
+
+  const { handleClearSave } = useContext(ExerciseContext);
+
+  const [items, setItems] = useState([])
+  // const [history, setHistory] = useState([])
+
+  // useEffect(() => {
+  //   const items = JSON.parse(localStorage.getItem('items'))
+  //   if (items) {
+  //    setItems(items)
+  //   }
+  // }, [])
+
+  useEffect(() => {
+  console.log(items)
+  if(items.length > 0) {
+    localStorage.setItem(items[0].templateName, JSON.stringify(items[0].exercise))
+  }
+  }, [items])
+
+
   const currentExercise = workouts[0].exercise;
-  console.log(currentExercise);
+
+  function workoutStorage(workouts) {
+    setItems(workouts)
+    // setHistory(workouts)
+    handleClearSave()
+  }
 
   const getExerciseContent = (currentExercise) => {
     let content = [];
@@ -35,7 +63,12 @@ export default function DisplayExercise({
     return content;
   };
 
-  return <>{getExerciseContent(currentExercise)}</>;
+  return <>
+  {getExerciseContent(currentExercise)}
+  <button onClick={() => workoutStorage(workouts)}>Save</button>
+  <h1>History</h1>
+  <WorkoutHistory history={workouts}/>
+  </>
 
   // return <ul>{getAnimalsContent(animals)}</ul>;
   // return (

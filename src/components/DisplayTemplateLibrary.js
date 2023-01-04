@@ -6,7 +6,6 @@ import { ExerciseContext } from "./App";
 export default function DisplayTemplateLibrary({templateLibrary}) {
     const { handleTemplateSelected } = useContext(ExerciseContext);
 
-    console.log(templateLibrary)
     const getExerciseContent = (templateLibrary) => {
         let content = [];
         for (let i = 0; i < templateLibrary.length; i++) {
@@ -26,12 +25,4 @@ export default function DisplayTemplateLibrary({templateLibrary}) {
       };
 
       return <><h1>Template Libary</h1>{getExerciseContent(templateLibrary)}</>;
-//   return (
-//     <div>
-//         {/* {templateLibrary.map((el, i) => {
-//             console.log(el)
-//             return <li key={el[i].id}>{el[i].templateName}</li>
-//         })} */}
-//     </div>
-//   )
 }
