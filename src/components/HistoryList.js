@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function HistoryList({exerciseComplete}) {
 
-    console.log(exerciseComplete)
     const log = exerciseComplete
   return (
     <div>

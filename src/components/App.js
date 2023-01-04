@@ -68,12 +68,10 @@ function App() {
 
   const [completed, setCompleted] = useState([])
   const [templateLibrary, setTemplateLibrary] = useState()
-  const [temp, setTemp] = useState([])
   const exerciseContextValue = {
     handleAddSet,
     handleTemplate,
     handleTemplateSelected,
-    handleClearSave
   }
 
   function handleTemplate(arr, tempName) {
@@ -96,28 +94,8 @@ function App() {
 
   function handleTemplateSelected(e, template){
     if (e.target.closest("[data-template]")) {
-      setTemp([template])
       setCompleted([template])
     }
-  }
-
-  function handleClearSave() {
-    console.log("clicked")
-    // for (let i = 0; i <= temp.length; i++) {
-    //   console.log("1st")
-    //   for (let j = 0; j < temp[i].exercise.length; j++) {
-    //     for (let k = 0; k < temp[i].exercise[j].logged.length; k++) {
-    //       if (temp[i].exercise[j].logged.length > 1) {
-    //         console.log("here")
-    //         console.log(temp[i].exercise[j].logged.length)
-    //         console.log(temp[i].exercise[j].logged[k])
-    //         temp[i].exercise[j].logged.pop()
-    //       }
-    //     }
-    //   }
-    // }
-
-    console.log(temp)
   }
 
   function handleAddSet(r, w, list, id) {

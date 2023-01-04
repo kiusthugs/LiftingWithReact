@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
 import CompletedLifts from "./CompletedLifts";
 import InputLifts from "./InputLifts";
 import WorkoutHistory from "./WorkoutHistory"
-import { ExerciseContext } from "./App";
 
 export default function DisplayExercise({
   workouts,
@@ -10,22 +9,20 @@ export default function DisplayExercise({
   handleWeight,
 }) {
 
-  const { handleClearSave } = useContext(ExerciseContext);
+  const [items, setItems] = useState()
+  const [history, setHistory] = useState(false)
+  // const [storageData, setStorageData] = useState([])
 
-  const [items, setItems] = useState([])
-  // const [history, setHistory] = useState([])
-
-  // useEffect(() => {
-  //   const items = JSON.parse(localStorage.getItem('items'))
-  //   if (items) {
-  //    setItems(items)
-  //   }
-  // }, [])
+  useEffect(() => {
+      const storage = JSON.parse(localStorage.getItem('liftingWithReact'))
+      console.log(storage)
+    // setStorageData(storage)
+  }, [items])
 
   useEffect(() => {
   console.log(items)
-  if(items.length > 0) {
-    localStorage.setItem(items[0].templateName, JSON.stringify(items[0].exercise))
+  if(items) {
+    localStorage.setItem('liftingWithReact', JSON.stringify(items))
   }
   }, [items])
 
@@ -33,9 +30,42 @@ export default function DisplayExercise({
   const currentExercise = workouts[0].exercise;
 
   function workoutStorage(workouts) {
+    console.log(workouts)
+    console.log(items)
+    // const originalItem = [...items, ]
+    
+    function workoutName() {
+      return workouts[0].templateName
+    }
+
+    if (items) {
+      console.log(items)
+      if (items.some(workoutName) || items.templateName === workoutName) {
+        console.log("same same")
+        console.log(items)
+        //replace
+        const copyItems = items
+        const idx = items.findIndex(item => item.templateName === workouts[0].templateName)
+
+        copyItems[idx] = workouts[0]
+        console.log(copyItems)
+        setItems(...items)
+        setHistory(true)
+        return
+      } 
+      else {
+        console.log("else")
+        console.log(items)
+        console.log(workouts)
+        setItems(...items, workouts)
+        setHistory(true)
+        return
+      }
+    }
+
     setItems(workouts)
-    // setHistory(workouts)
-    handleClearSave()
+    setHistory(true)
+    // console.log(storageData)
   }
 
   const getExerciseContent = (currentExercise) => {
@@ -66,25 +96,7 @@ export default function DisplayExercise({
   return <>
   {getExerciseContent(currentExercise)}
   <button onClick={() => workoutStorage(workouts)}>Save</button>
-  <h1>History</h1>
-  <WorkoutHistory history={workouts}/>
+  {history === true && <h1>History</h1>}
+  {history === true && <WorkoutHistory history={workouts}/>}
   </>
-
-  // return <ul>{getAnimalsContent(animals)}</ul>;
-  // return (
-  //   <>
-  //     {currentExercise.map((el, i) => {
-  //       return (
-  //         <div key={el.logged[i].id}>
-  //           <h2>Exercise: {el.name}</h2>
-  //           <h3>Set: {el.logged[i].set}</h3>
-  //           {/* change to Input Set: */}
-  //           <InputLifts selected={el} handleReps={handleReps} handleWeight={handleWeight}/>
-  //           <h2>Completed</h2>
-  //           <CompletedLifts selected={el}/>
-  //         </div>
-  //       )
-  //     })}
-  //   </>
-  // );
 }
