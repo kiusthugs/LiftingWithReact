@@ -13,11 +13,6 @@ export default function DisplayExercise({
   const [history, setHistory] = useState(false)
   // const [storageData, setStorageData] = useState([])
 
-  useEffect(() => {
-      const storage = JSON.parse(localStorage.getItem('liftingWithReact'))
-      console.log(storage)
-    // setStorageData(storage)
-  }, [items])
 
   useEffect(() => {
   console.log(items)
@@ -26,46 +21,82 @@ export default function DisplayExercise({
   }
   }, [items])
 
+  useEffect(() => {
+    const storage = JSON.parse(localStorage.getItem('liftingWithReact'))
+    setStorageLifts(storage)
+    console.log(storage)
+  // setStorageData(storage)
+}, [items])
+
+  const [storageLifts, setStorageLifts] = useState(JSON.parse(localStorage.getItem('liftingWithReact')))
+
 
   const currentExercise = workouts[0].exercise;
 
-  function workoutStorage(workouts) {
-    console.log(workouts)
-    console.log(items)
-    // const originalItem = [...items, ]
+  // function workoutStorage(workouts) {
+  //   console.log(workouts)
+  //   console.log(items)
     
-    function workoutName() {
-      return workouts[0].templateName
-    }
+  //   function workoutName() {
+  //     return workouts[0].templateName
+  //   }
 
-    if (items) {
-      console.log(items)
-      if (items.some(workoutName) || items.templateName === workoutName) {
-        console.log("same same")
-        console.log(items)
-        //replace
-        const copyItems = items
-        const idx = items.findIndex(item => item.templateName === workouts[0].templateName)
+  //   if (items) {
+  //     console.log(items)
+  //     if (items.some(workoutName) || items.templateName === workoutName) {
+  //       console.log("same")
+  //       console.log(items)
+  //       const copyItems = items
+  //       const idx = items.findIndex(item => item.templateName === workouts[0].templateName)
 
-        copyItems[idx] = workouts[0]
-        console.log(copyItems)
-        setItems(...items)
-        setHistory(true)
-        return
-      } 
-      else {
-        console.log("else")
-        console.log(items)
-        console.log(workouts)
-        setItems(...items, workouts)
-        setHistory(true)
-        return
+  //       copyItems[idx] = workouts[0]
+  //       console.log(copyItems)
+  //       setItems(...items)
+  //       setHistory(true)
+  //       return
+  //     } 
+  //     else {
+  //       console.log("else")
+  //       console.log(items)
+  //       console.log(workouts)
+  //       setItems(...items, workouts)
+  //       setHistory(true)
+  //       return
+  //     }
+  //   }
+
+  //   setItems(workouts)
+  //   setHistory(true)
+  // }
+
+  function workoutStorage() {
+    // console.log(items)
+    // console.log(storageLifts)
+    function checkArrMatch() {
+      console.log("fucntioning")
+      console.log(storageLifts)
+      console.log(workouts)
+      for (let i = 0; i < storageLifts.length; i++) {
+        if(storageLifts[i].templateName === workouts[0].templateName) {
+          console.log("name")
+          storageLifts[i] = workouts[0]
+          console.log(storageLifts)
+          return storageLifts
+        } 
       }
+      console.log("no matching after loop")
+      storageLifts.push(workouts[0])
+      setItems(storageLifts)
     }
-
-    setItems(workouts)
-    setHistory(true)
-    // console.log(storageData)
+    if(storageLifts) {
+      setItems(checkArrMatch)
+      setHistory(true)
+    } else {
+      console.log("else")
+      console.log(workouts)
+      setItems(workouts)
+      setHistory(true)
+    }
   }
 
   const getExerciseContent = (currentExercise) => {
