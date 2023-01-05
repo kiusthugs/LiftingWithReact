@@ -1,25 +1,36 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import HistoryList from './HistoryList'
+import { ExerciseContext } from "./App";
 
-
-export default function WorkoutHistory({history}) {
+export default function WorkoutHistory({history, storageLifts}) {
     // Display last session lift
     // Display history dependent on current workout template selected
-
-    const historyData = history[0].exercise
+    const { selectedTemplate } = useContext(ExerciseContext);
+  //setSelectedTemplate
+    // const historyData = history[0].exercise
+    const template = selectedTemplate.templateName
+    console.log("Storage History")
+    console.log(storageLifts)
+    console.log(selectedTemplate)
     // const storage = JSON.parse(localStorage.getItem('PullDay'))
     // console.log(storage)
 
-    return (
-      historyData.map((ele) => {
-        return(
-        <div key={ele.id}>
-          <h4>{ele.name}</h4>
-          <HistoryList exerciseComplete={ele.logged}/>
-        </div>
-        )
-      })
-    )
+    if(storageLifts) {
+      let matchWorkoutObj = storageLifts.find(o => o.templateName === template)
+      console.log(matchWorkoutObj)
+      return (
+          // return(
+          // <div key={ele.id}>
+          //   <h4>{ele.name}</h4>
+          //   <HistoryList exerciseComplete={ele.logged}/>
+          // </div>
+          // ))
+          <div key={matchWorkoutObj.id}>
+            <h4>{matchWorkoutObj.templateName}</h4>
+            <HistoryList exercises={matchWorkoutObj.exercise}/>
+          </div>
+      )
+    }
     
     // const data = (el) => {
     //   console.log("here")

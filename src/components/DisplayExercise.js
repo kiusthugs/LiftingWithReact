@@ -128,6 +128,6 @@ export default function DisplayExercise({
   {getExerciseContent(currentExercise)}
   <button onClick={() => workoutStorage(workouts)}>Save</button>
   {history === true && <h1>History</h1>}
-  {history === true && <WorkoutHistory history={workouts}/>}
+  {history === true && <WorkoutHistory history={workouts} storageLifts={storageLifts}/>}
   </>
 }

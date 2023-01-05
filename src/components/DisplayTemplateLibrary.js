@@ -4,7 +4,7 @@ import { ExerciseContext } from "./App";
 
 
 export default function DisplayTemplateLibrary({templateLibrary}) {
-    const { handleTemplateSelected } = useContext(ExerciseContext);
+    const { handleTemplateSelected } = useContext(ExerciseContext)
 
     const getExerciseContent = (templateLibrary) => {
         let content = [];
@@ -22,7 +22,7 @@ export default function DisplayTemplateLibrary({templateLibrary}) {
             }
         }
         return content;
-      };
+      }
 
       return <><h1>Template Libary</h1>{getExerciseContent(templateLibrary)}</>;
 }

@@ -68,10 +68,13 @@ function App() {
 
   const [completed, setCompleted] = useState([])
   const [templateLibrary, setTemplateLibrary] = useState()
+  const [selectedTemplate, setSelectedTemplate] = useState()
   const exerciseContextValue = {
     handleAddSet,
     handleTemplate,
     handleTemplateSelected,
+    selectedTemplate,
+    setSelectedTemplate
   }
 
   function handleTemplate(arr, tempName) {
@@ -94,6 +97,7 @@ function App() {
 
   function handleTemplateSelected(e, template){
     if (e.target.closest("[data-template]")) {
+      setSelectedTemplate(template)
       setCompleted([template])
     }
   }
