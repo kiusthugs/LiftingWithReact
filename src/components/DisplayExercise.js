@@ -1,13 +1,17 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import CompletedLifts from "./CompletedLifts";
 import InputLifts from "./InputLifts";
 import WorkoutHistory from "./WorkoutHistory"
+import { ExerciseContext } from "./App";
 
 export default function DisplayExercise({
   workouts,
   handleReps,
   handleWeight,
 }) {
+
+  const { handleClearWorkout } = useContext(ExerciseContext);
+  //not working yet
 
   const [items, setItems] = useState()
   const [history, setHistory] = useState(false)
@@ -33,52 +37,17 @@ export default function DisplayExercise({
 
   const currentExercise = workouts[0].exercise;
 
-  // function workoutStorage(workouts) {
-  //   console.log(workouts)
-  //   console.log(items)
-    
-  //   function workoutName() {
-  //     return workouts[0].templateName
-  //   }
-
-  //   if (items) {
-  //     console.log(items)
-  //     if (items.some(workoutName) || items.templateName === workoutName) {
-  //       console.log("same")
-  //       console.log(items)
-  //       const copyItems = items
-  //       const idx = items.findIndex(item => item.templateName === workouts[0].templateName)
-
-  //       copyItems[idx] = workouts[0]
-  //       console.log(copyItems)
-  //       setItems(...items)
-  //       setHistory(true)
-  //       return
-  //     } 
-  //     else {
-  //       console.log("else")
-  //       console.log(items)
-  //       console.log(workouts)
-  //       setItems(...items, workouts)
-  //       setHistory(true)
-  //       return
-  //     }
-  //   }
-
-  //   setItems(workouts)
-  //   setHistory(true)
-  // }
-
   function workoutStorage() {
     // console.log(items)
     // console.log(storageLifts)
+
     function checkArrMatch() {
-      console.log("fucntioning")
+      console.log("functioning")
       console.log(storageLifts)
       console.log(workouts)
       for (let i = 0; i < storageLifts.length; i++) {
         if(storageLifts[i].templateName === workouts[0].templateName) {
-          console.log("name")
+          console.log("same name")
           storageLifts[i] = workouts[0]
           console.log(storageLifts)
           return storageLifts
@@ -88,14 +57,19 @@ export default function DisplayExercise({
       storageLifts.push(workouts[0])
       setItems(storageLifts)
     }
+
+
     if(storageLifts) {
+      console.log("storage exists")
       setItems(checkArrMatch)
       setHistory(true)
+      // handleClearWorkout(workouts)
     } else {
       console.log("else")
       console.log(workouts)
       setItems(workouts)
       setHistory(true)
+      // handleClearWorkout(workouts)
     }
   }
 
@@ -116,8 +90,8 @@ export default function DisplayExercise({
               <h2>Completed</h2>
               <CompletedLifts selected={currentExercise[i]} />
             </div>
-          );
-          j = currentExercise[i].logged.length;
+          )
+          j = currentExercise[i].logged.length
         }
       }
     }
@@ -128,6 +102,6 @@ export default function DisplayExercise({
   {getExerciseContent(currentExercise)}
   <button onClick={() => workoutStorage(workouts)}>Save</button>
   {history === true && <h1>History</h1>}
-  {history === true && <WorkoutHistory history={workouts} storageLifts={storageLifts}/>}
+  {history === true && <WorkoutHistory storageLifts={storageLifts}/>}
   </>
 }

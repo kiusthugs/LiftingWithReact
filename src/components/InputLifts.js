@@ -24,7 +24,7 @@ export default function InputLifts({ selected}) {
       <button
         className="addBtn"
         onClick={() => {
-          handleAddSet(reps, weight, selected, selected.id);
+          handleAddSet(reps, weight, selected, selected.id)
         }}
       >
         Add Set

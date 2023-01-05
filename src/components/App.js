@@ -74,7 +74,8 @@ function App() {
     handleTemplate,
     handleTemplateSelected,
     selectedTemplate,
-    setSelectedTemplate
+    setSelectedTemplate,
+    handleClearWorkout
   }
 
   function handleTemplate(arr, tempName) {
@@ -119,6 +120,20 @@ function App() {
     }]
     
     setCompleted(updateCompleted)
+  }
+
+  function handleClearWorkout(w) {
+    console.log("clear")
+    console.log(w)
+    const workoutClear = w[0]
+
+    for (let i = 0; i < workoutClear.exercise.length; i++) {
+      workoutClear.exercise[i].logged.splice(1)
+    }
+
+    console.log("after")
+    console.log(w)
+    setCompleted(w)
   }
 
   return (

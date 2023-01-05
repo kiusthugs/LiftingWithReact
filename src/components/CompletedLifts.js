@@ -3,7 +3,7 @@ import React from 'react'
 export default function CompletedLifts({selected}) {
     const workoutLog = selected.logged
   return (
-    workoutLog.map((el,i) => {
+    workoutLog.map((el) => {
         // console.log(completed)
         // console.log(el.exercise[i].logged[i].id)
         return (

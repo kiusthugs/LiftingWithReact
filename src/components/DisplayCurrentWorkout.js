@@ -7,6 +7,7 @@ export default function DisplayCurrentWorkout({
   workouts,
 }) {
 //   const workoutExercises = workouts[0].exercise;
+console.log(workouts)
 
   return (
     <>

@@ -8,7 +8,6 @@ export default function HistoryList({exercises}) {
 
 
     const historyLogList = (exer, i) => {
-      console.log(i)
       let content = []
       for (let j = 0; j < exer[i].logged.length; j++) {
         if(exer[i].logged[j].weight) {
